@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transaksi Buku Ria</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #056875;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .book-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .book-item label {
+      flex: 1;
+      color: #555;
+    }
+
+    .book-item input[type="number"] {
+      width: 80px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2a9d8f;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #21867a;
+    }
+
+    .result {
+      margin-top: 20px;
+      background: #e0f7fa;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #333;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>TRANSAKSI BUKU RIA</h2>
+
+  <div class="book-item">
+    <label>1. Buku HTML (Rp100.000)</label>
+    <input type="number" id="buku1" min="0" value="0">
+  </div>
+
+  <div class="book-item">
+    <label>2. Buku CSS (Rp75.000)</label>
+    <input type="number" id="buku2" min="0" value="0">
+  </div>
+
+  <div class="book-item">
+    <label>3. Buku JavaScript (Rp150.000)</label>
+    <input type="number" id="buku3" min="0" value="0">
+  </div>
+
+  <div class="book-item">
+    <label>4. Buku Phyton (Rp50.000)</label>
+    <input type="number" id="buku4" min="0" value="0">
+  </div>
+
+    <div class="book-item">
+    <label>5. Buku PHP (Rp95.000)</label>
+    <input type="number" id="buku5" min="0" value="0">
+  </div>
+
+      <div class="book-item">
+    <label>6. Buku Macam-Macam Framework (Rp210.000)</label>
+    <input type="number" id="buku6" min="0" value="0">
+  </div>
+
+        <div class="book-item">
+    <label>7. Buku SQL (Rp85.000)</label>
+    <input type="number" id="buku7" min="0" value="0">
+  </div>
+
+          <div class="book-item">
+    <label>8. Buku Java (Rp100.000)</label>
+    <input type="number" id="buku8" min="0" value="0">
+  </div>
+
+            <div class="book-item">
+    <label>9. Buku Cara Pintar Menggunakan VS Code (Rp120.000)</label>
+    <input type="number" id="buku9" min="0" value="0">
+  </div>
+
+              <div class="book-item">
+    <label>10. Buku Cara Cerdas Belajar Coding (Rp175.000)</label>
+    <input type="number" id="buku10" min="0" value="0">
+  </div>
+
+  <button onclick="hitungTotal()">Hitung Total</button>
+
+  <div id="output" class="result"></div>
+</div>
+
+<script>
+  function hitungTotal() {
+    const harga = [100000, 75000, 150000, 50000, 95000, 210000, 85000, 100000, 120000, 175000];
+    const jumlah = [
+      parseInt(document.getElementById('buku1').value) || 0,
+      parseInt(document.getElementById('buku2').value) || 0,
+      parseInt(document.getElementById('buku3').value) || 0,
+      parseInt(document.getElementById('buku4').value) || 0,
+      parseInt(document.getElementById('buku5').value) || 0,
+      parseInt(document.getElementById('buku6').value) || 0,
+      parseInt(document.getElementById('buku7').value) || 0,
+      parseInt(document.getElementById('buku8').value) || 0,
+      parseInt(document.getElementById('buku9').value) || 0,
+      parseInt(document.getElementById('buku10').value) || 0
+    ];
+
+    let totalItem = jumlah.reduce((a, b) => a + b, 0);
+    let subtotal = 0;
+
+    for (let i = 0; i < harga.length; i++) {
+      subtotal += harga[i] * jumlah[i];
+    }
+
+    let diskon = totalItem > 3 ? subtotal * 0.10 : 0;
+    let totalBayar = subtotal - diskon;
+
+    const output = document.getElementById('output');
+    output.style.display = 'block';
+    output.innerHTML = `
+      Jumlah Buku: ${totalItem} <br>
+      Subtotal: Rp${subtotal.toLocaleString()} <br>
+      ${diskon > 0 ? `Diskon 10%: -Rp${diskon.toLocaleString()} <br>` : ''}
+      <strong>Total Bayar: Rp${totalBayar.toLocaleString()}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
